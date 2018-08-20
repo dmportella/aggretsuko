@@ -1,0 +1,27 @@
+{
+  "name": "aggretsuko",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.4.1",
+    "googleapis": "^32.0.0",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "sqlite3": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmportella/aggretsuko.git"
+  },
+  "author": "",
+  "license": "tbc",
+  "bugs": {
+    "url": "https://github.com/dmportella/aggretsuko/issues"
+  },
+  "homepage": "https://github.com/dmportella/aggretsuko#readme"
+}
