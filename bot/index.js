@@ -9,6 +9,7 @@ const events = [];
 
 commands.push(require('./commands/events.js'));
 commands.push(require('./commands/ping.js'));
+commands.push(require('./commands/gearScore.js'));
 commands.push(require('./commands/uptime.js'));
 commands.push(require('./commands/clearChannel.js'));
 
@@ -33,8 +34,9 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-    log(`message received id:${message.id} by member:${message.author.username}.`);
     if (!message.content.startsWith(configuration.discord.prefix) || message.author.bot) return;
+
+    log(`command message received id:${message.id} by member:${message.author.username}.`);
 
     const isAdmin = message.member.roles.find((role) => role.name == configuration.discord.adminRole);
     const args = message.content.slice(configuration.discord.prefix.length).trim().split(/ +/g);
