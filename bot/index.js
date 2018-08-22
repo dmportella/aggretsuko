@@ -12,7 +12,7 @@ commands.push(require('./commands/ping.js'));
 commands.push(require('./commands/uptime.js'));
 commands.push(require('./commands/clearChannel.js'));
 
-events.push(require('./events/manageEvents.js'));
+events.push(require('./events/reactionEvents'));
 
 const client = new Discord.Client();
 let configuration;
@@ -29,7 +29,7 @@ client.on('ready', () => {
         }
     });
 
-    _.map(_.concat(storage, events, commands), (item) => item.initialise(configuration, client));
+    _.map(_.concat(events, commands), (item) => item.initialise(client, storage, configuration.commands[item.sufix]));
 });
 
 client.on('message', (message) => {
@@ -50,17 +50,10 @@ client.on('message', (message) => {
 });
 
 exports.start = () => config.load()
-    .then(values => {
-        configuration = values;
-
-        client.login(configuration.discord.loginToken);
-        log(`client logged in.`);
-    });
-
-
+    .then(values => configuration = values)
+    .then(() => storage.initialise(configuration))
+    .then(() => client.login(configuration.discord.loginToken))
+    .catch((err) => log(`starting error: ${err.message}`));
 
 //https://www.gitbook.com/book/anidiotsguide/discord-js-bot-guide
-
-
-
 //https://discordapp.com/api/oauth2/authorize?client_id=477421707473190912&scope=bot&permissions=3669056

@@ -3,7 +3,7 @@ const log = require('debug')('aggretsuko:commands:events');
 exports.sufix = "events";
 exports.adminCommand = true;
 
-exports.initialise = (configuration, client) => {
+exports.initialise = (client, storage, configuration) => {
     log(`command initialised.`);
 };
 

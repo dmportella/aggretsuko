@@ -4,20 +4,20 @@ const fs = require('fs');
 const sqlite3 = require('sqlite3');
 let database;
 
-function createTables(err) {
-    if (err) {
-        log(err.message);
-    }
-    log('setting up tables.')
-    const file = fs.readFileSync('database.db.sql', 'utf8');
-    database.exec(file);
-    database.close();
-};
-
-exports.initialise = (configuration, client) => {
+exports.initialise = (configuration) => {
     return new Promise((resolve, reject) => {
         log('initialising database.')
-        database = new sqlite3.Database('database.db', createTables);
+        database = new sqlite3.Database(configuration.database, (err) => {
+            if (err) {
+                log(err.message);
+                reject(err);
+            }
+            log('setting up tables.')
+            const file = fs.readFileSync('database.db.sql', 'utf8');
+            database.exec(file);
+            database.close();
+            resolve();
+        });
     });
 };
 

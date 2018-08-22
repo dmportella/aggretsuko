@@ -1,6 +1,6 @@
-const log = require('debug')('aggretsuko:commands:ping');
+const log = require('debug')('aggretsuko:commands:player');
 
-exports.sufix = "ping";
+exports.sufix = "player";
 exports.adminCommand = false;
 
 exports.initialise = (client, storage, configuration) => {

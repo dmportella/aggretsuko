@@ -9,7 +9,7 @@ function messageReactionRemove(reaction, user) {
     log(`reaction name:${reaction.emoji.name} removed.`);
 }
 
-exports.initialise = (configuration, client) => {
+exports.initialise = (client, storage, configuration) => {
     log(`event initialised.`);
     
     client.on('messageReactionAdd', messageReactionAdd);

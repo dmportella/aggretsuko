@@ -4,7 +4,7 @@ const moment = require('moment');
 exports.sufix = "uptime";
 exports.adminCommand = false;
 
-exports.initialise = (configuration, client) => {
+exports.initialise = (client, storage, configuration) => {
     log(`command initialised.`);
     this.startup = new Date();
 };
