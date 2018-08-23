@@ -15,3 +15,5 @@ exports.initialise = (client, storage, configuration) => {
     client.on('messageReactionAdd', messageReactionAdd);
     client.on('messageReactionRemove', messageReactionRemove);
 };
+
+/*https://github.com/discordjs/discord.js/blob/c62f01f0e4e3c24c3227b10704ac3ccf8744a6e1/src/util/Constants.js*/
