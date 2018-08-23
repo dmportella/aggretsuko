@@ -51,6 +51,8 @@ client.on('message', (message) => {
     _.map(_.filter(commands, filter), (command) => command.process(message, args, configuration.discord, client));
 });
 
+client.on('rateLimit', (iobj) => log(iobj));
+
 exports.start = () => config.load()
     .then(values => configuration = values)
     .then(() => storage.initialise(configuration))

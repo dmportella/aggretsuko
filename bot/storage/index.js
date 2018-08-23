@@ -14,14 +14,22 @@ exports.initialise = (configuration) => {
             }
             log('setting up tables.')
             const file = fs.readFileSync('database.db.sql', 'utf8');
-            database.exec(file);
-            database.close();
-            resolve();
+            database.exec(file, (err) => {
+                if(err) reject(err.message);
+                else resolve();
+            });
         });
+    })
+    .then(() => {
+        log(`Setting up repositories.`);
+        const gear = require('./gear')(database);
+        
+        exports.gearScoreRepository = gear;
     });
 };
 
 
+// https://codeforgeek.com/2014/07/node-sqlite-tutorial/
 /*
 //https://stackoverflow.com/questions/44448029/how-to-use-google-sheets-api-while-inside-a-google-cloud-function/51037780#51037780
 
