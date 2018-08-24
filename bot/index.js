@@ -7,13 +7,13 @@ const storage = require('./storage');
 const commands = [];
 const events = [];
 
-commands.push(require('./commands/events.js'));
+commands.push(require('./commands/events'));
 commands.push(require('./commands/ping.js'));
 commands.push(require('./commands/gearScore.js'));
 commands.push(require('./commands/uptime.js'));
 commands.push(require('./commands/clearChannel.js'));
 
-events.push(require('./events/reactionEvents'));
+//events.push(require('./events/reactionEvents'));
 
 const client = new Discord.Client();
 let configuration;

@@ -1,8 +1,27 @@
 const log = require('debug')('aggretsuko:storage:gearscore');
+const _ = require('lodash');
 
 module.exports = (database) => {
     const internalDatabase = database;
     return {
+        getAllScores: () => {
+            return new Promise((resolve, reject) => {
+                internalDatabase.prepare('SELECT score FROM gearScores;')
+                .all((err, rows) => {
+                    if(err) {
+                        reject(err);
+                    } 
+                    
+                    if (rows === undefined) {
+                        reject(new Error('No score set.'))
+                    }
+                    else {
+                        const flattenArray = _.flatMap(rows, (row) => row.score);
+                        resolve(flattenArray);
+                    }
+                });
+            });
+        },
         getGearScore: (discordId) => {
             return new Promise((resolve, reject) => {
                 internalDatabase.prepare('SELECT score FROM gearScores WHERE discordId = ?;')

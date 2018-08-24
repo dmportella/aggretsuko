@@ -10,7 +10,7 @@ exports.initialise = (client, storage, configuration) => {
 };
 
 exports.process = (message, args, client) => {
-    const difference = moment(new Date(),"DD/MM/YYYY HH:mm:ss").diff(moment(this.startup,"DD/MM/YYYY HH:mm:ss"), 'seconds');
+    const difference = moment.utc(new Date(),"DD/MM/YYYY HH:mm:ss").diff(moment.utc(this.startup,"DD/MM/YYYY HH:mm:ss"), 'seconds');
     message.channel.send(`I have been up for: ${difference} seconds.`);
 
     log(`member:${message.author.username} executed command.`);
