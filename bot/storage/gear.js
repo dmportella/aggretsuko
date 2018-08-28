@@ -1,5 +1,7 @@
 const log = require('debug')('aggretsuko:storage:gearscore');
 const _ = require('lodash');
+const utils = require('../utils');
+const moment = require('moment');
 
 module.exports = (database) => {
     const internalDatabase = database;
@@ -41,8 +43,8 @@ module.exports = (database) => {
         },
         setGearScore: (discordId, score) => {
             return new Promise((resolve, reject) => {
-                internalDatabase.prepare('INSERT OR REPLACE INTO gearScores (discordId, score) values(?, ?);')
-                .run([discordId, score], (err) => {
+                internalDatabase.prepare('INSERT OR REPLACE INTO gearScores (discordId, updated, score) values(?, ?, ?);')
+                .run([discordId, utils.getFormattedDateTime(), score], (err) => {
                     if(err) reject(err);
                     else resolve();
                 });                

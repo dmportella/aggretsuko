@@ -2,6 +2,7 @@ const log = require('debug')('aggretsuko:commands:gearscore');
 const _ = require('lodash');
 const Discord = require('discord.js');
 
+const defaultColourHex = 0x33ff00;
 let _storage;
 
 function setGearScoreFromStorage(message, score) {
@@ -52,11 +53,23 @@ function fetchInfo(message) {
             return new Discord.RichEmbed()
                 .setDescription("Contains information about the gear score of the guild like averages, standard deviations and more.")
                 .setTimestamp(new Date())
+                .setColor(defaultColourHex)
                 .setTitle("Gear score Information")
                 .addField("Average (all)", `${average}`)
                 .addField("Standard Deviation (all)", `${deviation}`)
                 .setFooter("More info coming soon... :thinking:");
         });
+}
+
+function getHelpMessage() {
+    return Promise.resolve(
+        new Discord.RichEmbed()
+                .setColor(defaultColourHex)
+                .setTitle("Gear score help")
+                .addField("Set your gear score", `gearscore set 123`)
+                .addField("Show guild gearscore info", `gearscore info`)
+                .setFooter("More info coming soon... :thinking:")
+    );
 }
 
 exports.sufix = "gearscore";
@@ -84,6 +97,11 @@ exports.process = (message, args, client) => {
             fetchInfo(message)
             .then((response) => message.channel.send(response))
             .catch((err) => message.channel.send(`error: ${err.message}`));
+            break;
+        case 'help':
+        default:
+            getHelpMessage()
+            .then((helpMsg) => message.channel.send(helpMsg));
             break;
     }
 };

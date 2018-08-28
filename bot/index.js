@@ -57,7 +57,8 @@ exports.start = () => config.load()
     .then(values => configuration = values)
     .then(() => storage.initialise(configuration))
     .then(() => client.login(configuration.discord.loginToken))
-    .catch((err) => log(`starting error: ${err.message}`));
+    .catch((err) => log(`starting error: ${err}`));
 
+//https://anidiotsguide_old.gitbooks.io/discord-js-bot-guide/content/examples/command-with-arguments.html
 //https://www.gitbook.com/book/anidiotsguide/discord-js-bot-guide
 //https://discordapp.com/api/oauth2/authorize?client_id=477421707473190912&scope=bot&permissions=3669056
